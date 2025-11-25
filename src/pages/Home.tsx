@@ -14,16 +14,36 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/articles?featured=true&limit=6')
-      .then(res => res.json())
-      .then(data => {
-        setArticles(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Erro ao carregar artigos:', err);
-        setLoading(false);
-      });
+    // Dados temporários - depois substituímos pela API real
+    const tempArticles: Article[] = [
+      {
+        id: 1,
+        title: "Direito do Consumidor - Guia Completo",
+        slug: "direito-consumidor-guia-completo",
+        category_name: "Direito do Consumidor",
+        excerpt: "Aprenda seus direitos como consumidor e como exercê-los",
+        featured: true
+      },
+      {
+        id: 2,
+        title: "Rescisão Trabalhista - Como Calcular",
+        slug: "rescisao-trabalhista-calculo", 
+        category_name: "Direito Trabalhista",
+        excerpt: "Entenda como calcular sua rescisão trabalhista",
+        featured: true
+      },
+      {
+        id: 3,
+        title: "Erro Médico - Seus Direitos",
+        slug: "erro-medico-direitos",
+        category_name: "Direito Médico",
+        excerpt: "Saiba o que fazer em casos de erro médico",
+        featured: true
+      }
+    ];
+
+    setArticles(tempArticles);
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -36,7 +56,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <h1 className="text-3xl font-bold text-blue-800">Desenrola Direito</h1>
@@ -44,7 +63,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Artigos em Destaque</h2>
@@ -61,18 +79,8 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        {articles.length === 0 && (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-gray-600 mb-4">Nenhum artigo encontrado</h2>
-            <p className="text-gray-500">
-              Os artigos serão carregados em breve. Estamos preparando o conteúdo.
-            </p>
-          </div>
-        )}
       </main>
 
-      {/* Footer */}
       <footer className="bg-gray-800 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p>&copy; 2024 Desenrola Direito. Todos os direitos reservados.</p>
